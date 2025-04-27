@@ -1,0 +1,38 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model IEnumerable<CartItem>
+
+<h2>Вашата пазарска количка</h2>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Продукт</th>
+        <th>Цена</th>
+        <th>Количество</th>
+        <th>Междинна сума</th>
+        <th>Премахване от количката</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Product.Title</td>
+            <td>$@item.Product.Price</td>
+            <td>@item.Quantity</td>
+            <td>$@(item.Product.Price * item.Quantity)</td>
+            <td>
+                <form asp-action="RemoveFromCart" method="post">
+                    <input type="hidden" name="cartItemId" value="@item.Id" />
+                    <button type="submit" class="btn btn-danger">Премахване</button>
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+@if (!Model.Any())
+{
+    <p>Количката Ви е празна.</p>
+}

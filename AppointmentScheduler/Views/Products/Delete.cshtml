@@ -1,0 +1,20 @@
+﻿@model Product
+@{
+    ViewData["Title"] = "Потвърдете изтриване";
+}
+
+<h2 class="text-danger">Потвърдете изтриване</h2>
+<hr />
+
+<div class="alert alert-warning">
+    <h4>Сигурни ли сте, че искате да изтриете този продукт?</h4>
+    <strong>@Model.Title</strong><br />
+    <span>@Model.Description</span><br />
+    <span>Цена: <strong>@Model.Price</strong></span>
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Изтрий</button>
+    <a asp-action="Index" class="btn btn-secondary">Отказ</a>
+</form>

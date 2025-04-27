@@ -1,0 +1,44 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Свържете се с нас - OptiView";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Свържете се с OptiView</h2>
+    <p class="text-center">Вашият доверен партньор по пътя към безупречното очно здраве.</p>
+
+    <div class="row mt-4">
+        <!-- Contact Details -->
+        <div class="col-md-6">
+            <h4>Нашият магазин</h4>
+            <p><strong>OptiView</strong></p>
+            <p>
+                ул. „Княз Александър I“ 52 Пловдив, България
+            </p>
+            <p>Имейл: <a href="mailto:contact@optiview.com">contact@optiview.com</a></p>
+            <p>Телефон: <a href="tel:0882002000">0882002000</a></p>
+            <p>Работно Време: Пон-Събота, 9ч. - 18ч.</p>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="col-md-6">
+            <h4>Изпратете ни съобщение</h4>
+            <form>
+                <div class="mb-3">
+                    <label for="name" class="form-label">Вашето име</label>
+                    <input type="text" class="form-control" id="name" placeholder="Въведете вашето име">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Имейл</label>
+                    <input type="email" class="form-control" id="email" placeholder="Въведете вашия имейл">
+                </div>
+                <div class="mb-3">
+                    <label for="message" class="form-label">Вашето съобщение</label>
+                    <textarea class="form-control" id="message" rows="4" placeholder="Въведете вашето съобщение тук..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Изпращане</button>
+            </form>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,28 @@
+﻿@model IEnumerable<ApplicationUser>
+
+<table>
+    <thead>
+        <tr>
+            <th>Потребителско име</th>
+            <th>Имейл</th>
+            <th>Действие</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Name</td>
+                <td>@user.Email</td>
+                <td>
+                    @using (Html.BeginForm("Delete", "Account", FormMethod.Post, new { @onsubmit = "return confirm('Сигурни ли сте, че искате да изтриете този потребител?');" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.Hidden("id", user.Id)
+                        <button type="submit">Изтриване</button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

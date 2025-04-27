@@ -1,0 +1,87 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@inject Microsoft.AspNetCore.Identity.SignInManager<ApplicationUser> signInManager
+
+@if (signInManager.IsSignedIn(User))
+{
+    string userRole = User.IsInRole("Admin") ? "Admin" :
+                      User.IsInRole("Doctor") ? "Doctor" :
+                      User.IsInRole("Patient") ? "Patient" : null;
+
+    if (userRole != null)
+    {
+        <form method="post" id="logoutForm" asp-action="Logoff" asp-controller="Account">
+            <ul class="nav navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Home" asp-action="Index">Начало</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Products" asp-action="Index">Продукти</a>
+                </li>
+                @if (userRole == "Admin" || userRole == "Doctor" || userRole == "Patient")
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Account" asp-action="Profile">Моят профил</a>
+                </li>
+                }
+                @if (userRole == "Admin")
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Products" asp-action="Index">
+                            Управление на продукти
+                        </a>
+                    </li>
+                }
+                @if (userRole == "Admin")
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Products" asp-action="Create">Добавете продукт</a>
+                    </li>
+                }
+
+                @if (userRole == "Admin")
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Account" asp-action="Index">Управление на потребители</a>
+                    </li>
+                }
+
+                @if (userRole == "Patient")
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Cart" asp-action="Index">Количка</a>
+                    </li>
+                }
+
+                @if (userRole == "Doctor" || userRole == "Patient" || userRole == "Admin")
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Appointment" asp-action="Index">Записване за преглед</a>
+                    </li>
+                }
+
+                <li class="text-white nav-link">Здравейте!</li>
+                <li class="text-white nav-link">
+                    <a href="javascript:document.getElementById('logoutForm').submit()">Излизане</a>
+                </li>
+            </ul>
+        </form>
+    }
+}
+else
+{
+    <ul class="nav-link navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link text-white" asp-controller="Home" asp-action="Index">Начало</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-white" asp-controller="Products" asp-action="Index">Продукти</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-white" id="registerLink" asp-controller="Account" asp-action="Register">Регистрация</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-white" id="loginLink" asp-controller="Account" asp-action="Login">Вход</a>
+        </li>
+    </ul>
+}
