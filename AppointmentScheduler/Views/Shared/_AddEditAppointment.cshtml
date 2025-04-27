@@ -17,10 +17,23 @@
                         <label for="description">Описание</label>
                         <textarea asp-for="Description" name="description" class="form-control" id="description"></textarea>
                     </div>
-                    <div class="form-group">
-                        <label for="patientId">Избери пациент</label>
-                        <select asp-for="PatientId" name="patientId" id="patientId" asp-items="@(new SelectList(ViewBag.PatientList, "Id", "Name"))" class="form-control"></select>
-                    </div>
+                    
+                    
+                        @if (!User.IsInRole(AppointmentScheduler.Utility.Helper.Patient))
+                        {
+                            <div class="form-group">
+                                <label for="patientId">Избери пациент</label>
+                                <select asp-for="PatientId" name="patientId" id="patientId" asp-items="@(new SelectList(ViewBag.PatientList, "Id", "Name"))" class="form-control"></select>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="form-group d-none">
+                                <label for="patientId">Избери пациент</label>
+                                <select asp-for="PatientId" name="patientId" id="patientId" asp-items="@(new SelectList(ViewBag.PatientList, "Id", "Name"))" class="form-control" type="hidden"></select>
+                            </div>
+                        }
+                    
 
                     <!-- Hidden fields for storing selected start and end time -->
                     <input type="hidden" name="id" id="id" />
