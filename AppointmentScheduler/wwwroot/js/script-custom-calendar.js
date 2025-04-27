@@ -1,4 +1,4 @@
-﻿console.log("In custom script");
+console.log("In custom script");
 /*
 document.addEventListener('DOMContentLoaded', function InitializeCalendar() {
     try {
@@ -105,6 +105,14 @@ $('document').ready(function InitializeCalendar() {
                 },
                 select: function (info) {
                     console.log("User selected from:", info.start, "to", info.end);
+
+                    var today = new Date();
+                    today.setHours(0, 0, 0, 0); // Clear the time part
+
+                    if (info.start < today) {
+                        alert("Не може да създавате час със задна дата.");
+                        return; // Do NOT open the modal
+                    }
 
                     $("#appointmentInput").modal("show");
                     $("#title").val("");
